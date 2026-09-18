@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="icon" type="image/png" href="favicon/favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { background: #f4f4f2; }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: #4a4a52; }
+  @media (max-width: 760px) {
+    .jose-header { grid-template-columns: 1fr auto !important; grid-template-areas: "logo actions" "nav nav" !important; row-gap: 14px !important; }
+    .jose-header-flex { flex-wrap: wrap !important; row-gap: 12px !important; }
+    .jose-logo { grid-area: logo !important; justify-self: start !important; }
+    .jose-actions { grid-area: actions !important; }
+    .jose-nav-links { grid-area: nav !important; flex-wrap: nowrap !important; overflow-x: auto !important; padding-right: 0 !important; gap: 18px !important; -webkit-overflow-scrolling: touch; }
+    .jose-stack { grid-template-columns: 1fr !important; }
+    .jose-stack > p { justify-self: start !important; }
+    .jose-grid4 { grid-template-columns: repeat(2, 1fr) !important; }
+    .jose-gallery { grid-template-columns: 1fr !important; }
+    .jose-gallery-main { order: 1 !important; }
+    .jose-gallery-thumbs { order: 2 !important; flex-direction: row !important; flex-wrap: wrap !important; }
+    .jose-gallery-main { height: clamp(260px, 86vw, 480px) !important; }
+    .jose-cart-item { grid-template-columns: 76px 1fr !important; grid-template-areas: "thumb details" "qty qty" !important; row-gap: 10px !important; }
+    .jose-cart-thumb { grid-area: thumb !important; height: 76px !important; }
+    .jose-cart-details { grid-area: details !important; }
+    .jose-cart-qty { grid-area: qty !important; justify-self: start !important; }
+  }
+  @media (min-width: 761px) and (max-width: 1024px) {
+    .jose-header { gap: 14px !important; }
+    .jose-nav-links { gap: 16px !important; font-size: 12px !important; }
+    .jose-stack { gap: 22px !important; }
+    .jose-grid4 { grid-template-columns: repeat(3, 1fr) !important; }
+    .jose-gallery-main { height: 440px !important; }
+  }
+</style>
+</helmet>
+
+<div style="font-family: Montserrat, Helvetica, sans-serif; color: #111113; background: #f4f4f2; padding: 18px;">
+
+  <div style="background: #ffffff; padding: 22px 30px 44px;">
+    <header class="jose-header-flex" style="display: flex; justify-content: space-between; align-items: center; gap: 30px; padding-bottom: 30px;">
+      <nav class="jose-nav-links" style="display: flex; gap: 26px; font-size: 13.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;">
+        <a href="Jose Store.dc.html">Inicio</a>
+        <a href="Relojes.dc.html">Relojes</a>
+        <a href="Zapatos.dc.html">Zapatos</a>
+        <a href="Chanclas.dc.html">Chanclas</a>
+        <a href="Ropa.dc.html">Ropa</a>
+      </nav>
+      <div style="display: flex; gap: 20px; align-items: center; font-family: Montserrat, Helvetica, sans-serif; font-weight: 500; font-size: 12.5px; letter-spacing: 0.08em;">
+        <a href="#">BUSCAR</a>
+        <a href="Carrito.dc.html" style="border-bottom: 2px solid #111113;">CARRITO ({{ unidades }})</a>
+      </div>
+    </header>
+
+    <div class="jose-stack" style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 46px; align-items: start;">
+      <div>
+        <h1 style="font-family: Montserrat, Helvetica, sans-serif; font-weight: 700; font-size: 46px; line-height: 0.98; letter-spacing: -0.025em; margin: 0 0 6px;">Tu pedido</h1>
+        <p style="font-family: Montserrat, Helvetica, sans-serif; font-weight: 500; font-size: 12.5px; letter-spacing: 0.12em; color: #5f5f66; margin: 0 0 26px;">{{ resumenLinea }}</p>
+
+        <sc-if value="{{ vacio }}" hint-placeholder-val="{{ false }}">
+          <div style="border: 1px solid #e8e8e4; padding: 40px 30px; text-align: center;">
+            <p style="font-size: 15px; line-height: 1.7; color: #4d4d55; margin: 0 0 20px;">Todavía no has agregado productos. Entra al catálogo y guarda lo que te guste.</p>
+            <a href="Relojes.dc.html" style="display: inline-block; background: #111113; color: #fff; font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 14px 24px;" style-hover="background: #33333a; color: #fff;">Ver catálogo</a>
+          </div>
+        </sc-if>
+
+        <div style="display: flex; flex-direction: column; border-top: 1px solid #e8e8e4;">
+          <sc-for list="{{ items }}" as="it" hint-placeholder-count="0">
+            <div class="jose-cart-item" style="display: grid; grid-template-columns: 110px 1fr auto; gap: 20px; align-items: center; border-bottom: 1px solid #e8e8e4; padding: 18px 0;">
+              <div class="jose-cart-thumb" style="height: 110px; background: #ffffff; display: flex; align-items: center; justify-content: center; overflow: hidden;">{{ it.media }}</div>
+              <div class="jose-cart-details" style="display: flex; flex-direction: column; gap: 6px;">
+                <p style="font-size: 15px; font-weight: 600; line-height: 1.4; margin: 0;">{{ it.nombre }}</p>
+                <p style="font-family: Montserrat, Helvetica, sans-serif; font-weight: 500; font-size: 12.5px; color: #4d4d55; margin: 0;">{{ it.detalle }}</p>
+                <button type="button" onClick="{{ it.quitar }}" style="align-self: start; background: none; border: none; padding: 0; font-family: Montserrat, Helvetica, sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #a03030; cursor: pointer;">Quitar</button>
+              </div>
+              <div class="jose-cart-qty" style="display: flex; align-items: center; border: 1px solid #dcdcd7;">
+                <button type="button" onClick="{{ it.menos }}" style="background: none; border: none; font-size: 16px; width: 38px; height: 38px; cursor: pointer;" style-hover="background: #f4f4f2;">−</button>
+                <span style="font-family: Montserrat, Helvetica, sans-serif; font-weight: 500; font-size: 15px; min-width: 34px; text-align: center;">{{ it.cantidad }}</span>
+                <button type="button" onClick="{{ it.mas }}" style="background: none; border: none; font-size: 16px; width: 38px; height: 38px; cursor: pointer;" style-hover="background: #f4f4f2;">+</button>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="background: #111113; color: #fff; padding: 30px 28px;">
+        <h2 style="font-family: Montserrat, Helvetica, sans-serif; font-weight: 700; font-size: 19px; line-height: 1.05; letter-spacing: -0.025em; margin: 0 0 20px;">Resumen</h2>
+        <div style="display: flex; flex-direction: column; gap: 12px; font-size: 13.5px; color: #c6c6c1; border-bottom: 1px solid #2a2a30; padding-bottom: 18px; margin-bottom: 18px;">
+          <p style="display: flex; justify-content: space-between; margin: 0;"><span>Productos</span><span style="color: #fff;">{{ unidades }}</span></p>
+          <p style="display: flex; justify-content: space-between; margin: 0;"><span>Con precio</span><span style="color: #fff;">{{ subtotal }}</span></p>
+          <p style="display: flex; justify-content: space-between; margin: 0;"><span>Por cotizar</span><span style="color: #fff;">{{ porCotizar }}</span></p>
+          <p style="display: flex; justify-content: space-between; margin: 0;"><span>Envío</span><span style="color: #fff;">Se confirma por WhatsApp</span></p>
+        </div>
+        <p style="font-size: 13.5px; line-height: 1.65; color: #c6c6c1; margin: 0 0 22px;">Al enviar el pedido se abre WhatsApp con la lista completa: productos, tallas, cantidades y total.</p>
+        <a href="{{ enlace }}" target="_blank" rel="noopener" style="display: block; text-align: center; background: #fff; color: #111113; font-size: 13.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 16px 20px;" style-hover="background: #d9d9d4; color: #111113;">Realizar pedido por WhatsApp</a>
+        <button type="button" onClick="{{ vaciar }}" style="width: 100%; margin-top: 12px; background: none; border: 1px solid #3a3a42; color: #c6c6c1; font-family: Montserrat, sans-serif; font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 13px 20px; cursor: pointer;" style-hover="border-color: #fff; color: #fff;">Vaciar carrito</button>
+      </div>
+    </div>
+  </div>
+
+  <footer style="background: #ffffff; padding: 34px 30px 24px; margin-top: 18px; display: flex; justify-content: space-between; font-family: Montserrat, Helvetica, sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 0.1em; color: #66666d;">
+    <span>© 2026 JOSE STORE</span>
+    <span>PEDIDOS POR WHATSAPP</span>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1440}, &quot;whatsapp&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;573003838830&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Pedidos&quot;}}">
+class Component extends DCLogic {
+  state = { items: [], listo: false };
+
+  componentDidMount() {
+    import("./carrito.js").then(car => {
+      this.car = car;
+      this.sync();
+      this.onEvt = () => this.sync();
+      window.addEventListener("jose-carrito", this.onEvt);
+    });
+  }
+  componentWillUnmount() {
+    if (this.onEvt) window.removeEventListener("jose-carrito", this.onEvt);
+  }
+  sync() { this.setState({ items: this.car.leer(), listo: true }); }
+
+  img(src, name) {
+    if (!src) return null;
+    return React.createElement("img", { src, alt: name, loading: "lazy", decoding: "async", style: { maxHeight: 96, maxWidth: "88%", width: "auto", height: "auto", display: "block", objectFit: "contain" } });
+  }
+
+  renderVals() {
+    const items = this.state.items;
+    const unidades = items.reduce((s, x) => s + x.cantidad, 0);
+    const conPrecio = items.filter(x => /\d/.test(String(x.precio)));
+    const total = conPrecio.reduce((s, x) => {
+      const v = parseInt(String(x.precio).replace(/[^0-9]/g, ""), 10) || 0;
+      return s + v * x.cantidad;
+    }, 0);
+    const numero = this.props.whatsapp || (this.car && this.car.WHATSAPP) || "573003838830";
+    return {
+      unidades,
+      vacio: this.state.listo && items.length === 0,
+      resumenLinea: items.length
+        ? unidades + (unidades === 1 ? " PRODUCTO EN EL PEDIDO" : " PRODUCTOS EN EL PEDIDO")
+        : "CARRITO VACÍO",
+      subtotal: total ? "$" + total.toLocaleString("es-CO") : "—",
+      porCotizar: (items.length - conPrecio.length) + " productos",
+      enlace: this.car && items.length ? this.car.enlaceWhatsApp(items, numero) : "#",
+      vaciar: () => { if (this.car) this.car.vaciar(); },
+      items: items.map((x, i) => ({
+        nombre: x.nombre,
+        cantidad: x.cantidad,
+        detalle: (x.talla ? "Talla " + x.talla + " · " : "") + x.precio,
+        media: this.img(x.img, x.nombre),
+        menos: () => this.car.cambiarCantidad(i, -1),
+        mas: () => this.car.cambiarCantidad(i, 1),
+        quitar: () => this.car.quitar(i)
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>

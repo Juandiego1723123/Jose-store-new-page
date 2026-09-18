@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="icon" type="image/png" href="favicon/favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { background: #f4f4f2; }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: #4a4a52; }
+  @keyframes joseSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @media (max-width: 760px) {
+    .jose-header { grid-template-columns: 1fr auto !important; grid-template-areas: "logo actions" "nav nav" !important; row-gap: 14px !important; }
+    .jose-header-flex { flex-wrap: wrap !important; row-gap: 12px !important; }
+    .jose-logo { grid-area: logo !important; justify-self: start !important; }
+    .jose-actions { grid-area: actions !important; }
+    .jose-nav-links { grid-area: nav !important; flex-wrap: nowrap !important; overflow-x: auto !important; padding-right: 0 !important; gap: 18px !important; -webkit-overflow-scrolling: touch; }
+    .jose-stack { grid-template-columns: 1fr !important; }
+    .jose-stack > p { justify-self: start !important; }
+    .jose-grid4 { grid-template-columns: repeat(2, 1fr) !important; }
+    .jose-gallery { grid-template-columns: 1fr !important; }
+    .jose-gallery-main { order: 1 !important; }
+    .jose-gallery-thumbs { order: 2 !important; flex-direction: row !important; flex-wrap: wrap !important; }
+    .jose-gallery-main { height: clamp(260px, 86vw, 480px) !important; }
+    .jose-cart-item { grid-template-columns: 76px 1fr !important; grid-template-areas: "thumb details" "qty qty" !important; row-gap: 10px !important; }
+    .jose-cart-thumb { grid-area: thumb !important; height: 76px !important; }
+    .jose-cart-details { grid-area: details !important; }
+    .jose-cart-qty { grid-area: qty !important; justify-self: start !important; }
+  }
+  @media (min-width: 761px) and (max-width: 1024px) {
+    .jose-header { gap: 14px !important; }
+    .jose-nav-links { gap: 16px !important; font-size: 12px !important; }
+    .jose-stack { gap: 22px !important; }
+    .jose-grid4 { grid-template-columns: repeat(3, 1fr) !important; }
+    .jose-gallery-main { height: 440px !important; }
+  }
+</style>
+</helmet>
+
+<div style="font-family: Montserrat, Helvetica, sans-serif; color: #111113; background: #f4f4f2; padding: 18px;">
+
+  <sc-if value="{{ noti }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; top: 24px; right: 24px; z-index: 50; display: flex; gap: 14px; align-items: center; background: #111113; color: #fff; padding: 16px 18px; max-width: 340px; box-shadow: 0 12px 30px rgba(17,17,19,0.22);">
+      <span style="width: 34px; height: 34px; flex: none; border: 1px solid #3a3a42; display: flex; align-items: center; justify-content: center; font-size: 15px;">✓</span>
+      <span style="display: flex; flex-direction: column; gap: 3px;">
+        <span style="font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;">Añadido al pedido</span>
+        <span style="font-size: 12.5px; line-height: 1.5; color: #c6c6c1;">{{ notiTexto }}</span>
+        <a href="Carrito.dc.html" style="margin-top: 4px; font-family: Montserrat, Helvetica, sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; border-bottom: 1px solid #4a4a52; align-self: start;" style-hover="color: #fff; border-color: #fff;">Ver carrito</a>
+      </span>
+      <button type="button" onClick="{{ cerrarNoti }}" style="background: none; border: none; color: #8d8d87; font-size: 16px; cursor: pointer; align-self: start; padding: 0;" style-hover="color: #fff;">×</button>
+    </div>
+  </sc-if>
+
+
+  <div style="background: #ffffff; padding: 22px 30px 0;">
+    <header class="jose-header-flex" style="display: flex; justify-content: space-between; align-items: center; gap: 30px; padding-bottom: 22px;">
+      <nav class="jose-nav-links" style="display: flex; gap: 26px; font-size: 13.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;">
+        <a href="Jose Store.dc.html">Inicio</a>
+        <a href="Relojes.dc.html">Relojes</a>
+        <a href="Zapatos.dc.html">Zapatos</a>
+        <a href="Chanclas.dc.html">Chanclas</a>
+        <a href="Ropa.dc.html">Ropa</a>
+      </nav>
+      <div style="display: flex; gap: 20px; align-items: center; font-family: Montserrat, Helvetica, sans-serif; font-weight: 500; font-size: 12.5px; letter-spacing: 0.08em;">
+        <a href="#">BUSCAR</a>
+        <a href="Carrito.dc.html">CARRITO ({{ unidades }})</a>
+      </div>
+    </header>
+
+    <p style="font-family: Montserrat, Helvetica, sans-serif; font-weight: 500; font-size: 12.5px; letter-spacing: 0.12em; color: #5f5f66; margin: 0 0 22px;">
+      <a href="Jose Store.dc.html">INICIO</a> / <a href="{{ seccionHref }}">{{ seccionUpper }}</a> / DETALLE
+    </p>
+
+    <section class="jose-stack" style="display: grid; grid-template-columns: 1.15fr 1fr; gap: 46px; padding-bottom: 46px;">
+      <div class="jose-gallery" style="display: grid; grid-template-columns: {{ colsGaleria }}; gap: 16px; align-items: start;">
+        <div class="jose-gallery-thumbs" style="display: flex; flex-direction: column; gap: 10px;">
+          <sc-for list="{{ miniaturas }}" as="t" hint-placeholder-count="0">
+            <button type="button" onClick="{{ t.go }}" aria-label="{{ t.label }}" style="{{ t.style }}">{{ t.media }}</button>
+          </sc-for>
+          <sc-if value="{{ tieneCarrusel }}" hint-placeholder-val="{{ false }}">
+            <button type="button" onClick="{{ siguiente }}" aria-label="Siguiente" style="width: 96px; height: 34px; background: none; border: none; font-size: 17px; color: #5f5f66; cursor: pointer;" style-hover="color: #111113;">⌄</button>
+          </sc-if>
+        </div>
+        <div class="jose-gallery-main" style="position: relative; background: #ffffff; height: 780px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+          <sc-if value="{{ imagen }}" hint-placeholder-val="{{ false }}">{{ imagen }}</sc-if>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; padding-top: 6px;">
+        <p style="font-family: Montserrat, Helvetica, sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 0.14em; color: #5f5f66; margin: 0 0 14px;">{{ seccionUpper }}</p>
+        <h1 style="font-family: Montserrat, Helvetica, sans-serif; font-weight: 700; font-size: 33px; line-height: 1; letter-spacing: -0.025em; margin: 0 0 14px;">{{ nombre }}</h1>
+        <p style="font-size: 18px; font-weight: 700; margin: 0 0 22px;">{{ precio }}</p>
+        <p style="font-size: 15px; line-height: 1.7; color: #3f3f47; margin: 0 0 28px; text-wrap: pretty;">{{ descripcion }}</p>
+
+        <sc-if value="{{ tieneColores }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-bottom: 26px;">
+            <p style="font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 10px;">Color: {{ colorLabel }}</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+              <sc-for list="{{ colores }}" as="c" hint-placeholder-count="4">
+                <button type="button" onClick="{{ c.select }}" title="{{ c.name }}" style="{{ c.style }}"></button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ tieneTallas }}" hint-placeholder-val="{{ true }}">
+          <div style="margin-bottom: 26px;">
+            <p style="font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 10px;">Talla</p>
+            <div style="display: flex; gap: 8px;">
+              <sc-for list="{{ tallas }}" as="t" hint-placeholder-count="5">
+                <button type="button" onClick="{{ t.select }}" style="{{ t.style }}">{{ t.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <div style="margin-bottom: 26px;">
+          <p style="font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 10px;">Cantidad</p>
+          <div style="display: flex; align-items: center; border: 1px solid #dcdcd7; width: max-content;">
+            <button type="button" onClick="{{ menos }}" style="background: none; border: none; font-family: Montserrat, sans-serif; font-size: 18px; width: 46px; height: 46px; cursor: pointer;" style-hover="background: #f4f4f2;">−</button>
+            <span style="font-family: Montserrat, Helvetica, sans-serif; font-weight: 500; font-size: 14px; min-width: 42px; text-align: center;">{{ cantidad }}</span>
+            <button type="button" onClick="{{ mas }}" style="background: none; border: none; font-family: Montserrat, sans-serif; font-size: 18px; width: 46px; height: 46px; cursor: pointer;" style-hover="background: #f4f4f2;">+</button>
+          </div>
+        </div>
+
+        <button type="button" onClick="{{ agregar }}" style="background: #111113; color: #fff; border: none; font-family: Montserrat, sans-serif; font-size: 13.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 18px 26px; cursor: pointer; margin-bottom: 12px;" style-hover="background: #33333a;">{{ botonLabel }}</button>
+        <div style="margin-bottom: 30px;"></div>
+
+        <div style="border-top: 1px solid #e8e8e4;">
+          <sc-for list="{{ secciones }}" as="s" hint-placeholder-count="3">
+            <div style="border-bottom: 1px solid #e8e8e4;">
+              <button type="button" onClick="{{ s.toggle }}" style="width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 12px; background: none; border: none; padding: 18px 0; cursor: pointer; font-family: Montserrat, sans-serif; font-size: 13.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-align: left; color: #111113;">
+                {{ s.titulo }}<span style="font-size: 17px; font-weight: 400;">{{ s.icono }}</span>
+              </button>
+              <sc-if value="{{ s.abierta }}" hint-placeholder-val="{{ false }}">
+                <p style="font-size: 13.5px; line-height: 1.7; color: #4d4d55; margin: 0 0 18px;">{{ s.texto }}</p>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div style="background: #ffffff; padding: 34px 30px 44px; margin-top: 18px;">
+    <h2 style="font-family: Montserrat, Helvetica, sans-serif; font-weight: 700; font-size: 25px; line-height: 1; letter-spacing: -0.025em; margin: 0 0 22px;">También te puede gustar</h2>
+    <div class="jose-grid4" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;">
+      <sc-for list="{{ relacionados }}" as="r" hint-placeholder-count="4">
+        <a href="{{ r.href }}" style="display: flex; flex-direction: column; border: 1px solid #e8e8e4;" style-hover="border-color: #111113; color: #111113;">
+          <span style="height: 240px; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden;">{{ r.media }}</span>
+          <span style="display: flex; flex-direction: column; gap: 6px; border-top: 1px solid #e8e8e4; padding: 14px 16px 16px;">
+            <span style="font-size: 13.5px; font-weight: 600; line-height: 1.4;">{{ r.name }}</span>
+            <span style="font-family: Montserrat, Helvetica, sans-serif; font-weight: 500; font-size: 12.5px; color: #4d4d55;">{{ r.precio }}</span>
+          </span>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+
+  <footer style="background: #ffffff; padding: 34px 30px 24px; margin-top: 18px; display: flex; justify-content: space-between; font-family: Montserrat, Helvetica, sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 0.1em; color: #66666d;">
+    <span>© 2026 JOSE STORE</span>
+    <span>PEDIDOS POR WHATSAPP</span>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1440}}">
+class Component extends DCLogic {
+  state = { p: null, talla: null, foto: 0, abiertas: {}, cantidad: 1, noti: false, notiTexto: "", unidades: 0, relacionados: [] };
+
+  componentWillUnmount() { clearTimeout(this.notiTimer); }
+
+  componentDidMount() {
+    Promise.all([import("./productos.js"), import("./carrito.js")]).then(([cat, car]) => {
+      this.cat = cat; this.car = car;
+      const id = new URLSearchParams(location.search).get("p");
+      const p = (id && cat.findProducto(id)) || cat.productos[0];
+      const pool = cat.productos.filter(x => x.seccion === p.seccion && x.id !== p.id).slice(0, 4);
+      this.setState({
+        p, relacionados: pool,
+        talla: p.sizes ? p.sizes[0] : null,
+        color: null,
+        unidades: car.totalUnidades()
+      });
+    });
+  }
+
+  img(src, name, max) {
+    if (!src) return null;
+    return React.createElement("img", { src, alt: name, loading: "lazy", decoding: "async", style: { maxHeight: max, maxWidth: "88%", width: "auto", height: "auto", display: "block", objectFit: "contain", animation: /ch-rueda-colores/.test(src) ? "joseSpin 18s linear infinite" : undefined } });
+  }
+
+  renderVals() {
+    const p = this.state.p;
+    const talla = this.state.talla;
+    const seccion = p ? p.seccion : "Catálogo";
+    const esZapato = seccion === "Zapatos";
+    const base = this.state.color ? this.state.color.img : (p && p.img);
+    const extra = this.state.color ? this.state.color.modelo : (p && p.modelo);
+    const extraFotos = (this.state.color && this.state.color.fotos) || (p && p.fotos) || [];
+    const fotos = (seccion === "Ropa" ? [base, extra] : [extra, base]).concat(extraFotos).filter(Boolean);
+    const idx = fotos.length ? this.state.foto % fotos.length : 0;
+    const fotoActual = fotos[idx];
+    const esChancla = seccion === "Chanclas";
+    const notaTexto = seccion === "Ropa"
+      ? "Prenda disponible en tallas S a XL. Escoge el color antes de añadirla al pedido."
+      : ((esZapato || esChancla)
+        ? "Línea 1.1: réplica de alta calidad, no producto original. Tallas disponibles de 38 a 42."
+        : "Reloj original de marca, importado. El precio se confirma por cotización directa con el vendedor.");
+    return {
+      unidades: this.state.unidades,
+      nombre: p ? p.name : "Cargando…",
+      precio: p ? (p.price || "A cotizar") : "",
+      descripcion: p ? p.meta : "",
+      seccionUpper: seccion.toUpperCase(),
+      seccionHref: seccion === "Ropa" ? "Ropa.dc.html" : (esChancla ? "Chanclas.dc.html" : (esZapato ? "Zapatos.dc.html" : "Relojes.dc.html")),
+      secciones: [
+        ["Material y acabados", p ? p.meta : ""],
+        ["Envíos y entrega", "Enviamos a todo el país. El valor y el tiempo de entrega se confirman por WhatsApp al cerrar el pedido."],
+        ["Información adicional", notaTexto]
+      ].map(([titulo, texto], i) => ({
+        titulo, texto,
+        abierta: !!this.state.abiertas[i],
+        icono: this.state.abiertas[i] ? "−" : "+",
+        toggle: () => this.setState(s => ({ abiertas: { ...s.abiertas, [i]: !s.abiertas[i] } }))
+      })),
+      colsGaleria: fotos.length > 1 ? "96px 1fr" : "1fr",
+      tieneCarrusel: fotos.length > 1,
+      anterior: () => this.setState(s => ({ foto: (s.foto - 1 + fotos.length) % fotos.length })),
+      siguiente: () => this.setState(s => ({ foto: (s.foto + 1) % fotos.length })),
+      miniaturas: (fotos.length > 1 ? fotos : []).map((f, i) => ({
+        label: "Foto " + (i + 1),
+        go: () => this.setState({ foto: i }),
+        style: "width: 96px; height: 118px; padding: 0; cursor: pointer; overflow: hidden; background: #fff; border: 1px solid " +
+          (i === idx ? "#111113" : "#e2e2de") + ";",
+        media: React.createElement("img", { src: f, alt: "", loading: "lazy", decoding: "async", style: { width: "100%", height: "100%", objectFit: "cover", display: "block" } })
+      })),
+      imagen: p ? React.createElement("img", {
+        src: fotoActual,
+        alt: p.name,
+        key: fotoActual,
+        loading: "eager",
+        fetchpriority: "high",
+        decoding: "async",
+        style: /ch-rueda-colores/.test(fotoActual || "")
+          ? { maxHeight: 560, maxWidth: "88%", width: "auto", height: "auto", display: "block", objectFit: "contain", animation: "joseSpin 18s linear infinite" }
+          : (seccion === "Ropa"
+            ? { width: "100%", height: "100%", display: "block", objectFit: "contain" }
+            : { maxHeight: 560, maxWidth: "88%", width: "auto", height: "auto", display: "block", objectFit: "contain" })
+      }) : null,
+      tieneColores: !!(p && p.colors && p.colors.length),
+      colorLabel: this.state.color ? this.state.color.name : "",
+      colores: (p && p.colors ? p.colors : []).map(c => ({
+        name: c.name,
+        select: () => this.setState({ color: c, foto: 0 }),
+        style: "width: 40px; height: 40px; cursor: pointer; padding: 0; background: " + c.hex +
+          "; border: 2px solid " + (this.state.color && this.state.color.name === c.name ? "#111113" : "#dcdcd7") + ";"
+      })),
+      tieneTallas: !!(p && p.sizes),
+      cantidad: this.state.cantidad,
+      noti: this.state.noti,
+      notiTexto: this.state.notiTexto,
+      cerrarNoti: () => { clearTimeout(this.notiTimer); this.setState({ noti: false }); },
+      botonLabel: "Añadir al pedido",
+      nota: seccion === "Ropa"
+        ? "Prenda disponible en tallas S a XL. Escoge el color antes de añadirla al pedido."
+        : ((esZapato || esChancla)
+          ? "Línea 1.1: réplica de alta calidad, no producto original. Tallas disponibles de 38 a 42."
+          : "Reloj original de marca, importado. El precio se confirma por cotización directa con el vendedor."),
+      tallas: (p && p.sizes ? p.sizes : []).map(t => ({
+        label: t,
+        select: () => this.setState({ talla: t }),
+        style: "font-family: Montserrat, Helvetica, sans-serif; font-weight: 500; font-size: 13.5px; min-width: 48px; height: 44px; cursor: pointer; border: 1px solid " +
+          (t === talla ? "#111113" : "#dcdcd7") + "; background: " + (t === talla ? "#111113" : "#fff") + "; color: " + (t === talla ? "#fff" : "#111113") + ";"
+      })),
+      menos: () => this.setState(s => ({ cantidad: Math.max(1, s.cantidad - 1) })),
+      mas: () => this.setState(s => ({ cantidad: s.cantidad + 1 })),
+      agregar: () => {
+        if (!p || !this.car) return;
+        const color = this.state.color;
+        if (p.colors && p.colors.length && !color) {
+          clearTimeout(this.notiTimer);
+          this.setState({ noti: true, notiTexto: "Escoge primero un color." });
+          this.notiTimer = setTimeout(() => this.setState({ noti: false }), 3000);
+          return;
+        }
+        this.car.agregar({
+          id: p.id + (talla ? "-" + talla : "") + (color ? "-" + color.name : ""),
+          nombre: p.name + (color ? " — " + color.name : ""),
+          precio: p.price || "A cotizar",
+          talla: talla,
+          cantidad: this.state.cantidad,
+          img: (color && color.img) || p.img
+        });
+        const detalle = [p.name + (color ? " — " + color.name : "")];
+        if (talla) detalle.push("talla " + talla);
+        detalle.push("x" + this.state.cantidad);
+        clearTimeout(this.notiTimer);
+        this.setState({ unidades: this.car.totalUnidades(), noti: true, notiTexto: detalle.join(" · ") });
+        this.notiTimer = setTimeout(() => this.setState({ noti: false }), 4000);
+      },
+      relacionados: this.state.relacionados.map(r => ({
+        name: r.name,
+        precio: r.price || "A cotizar",
+        href: "Producto.dc.html?p=" + r.id,
+        media: this.img(r.img, r.name, 210)
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>

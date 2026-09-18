@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="icon" type="image/png" href="favicon/favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/seccion-relojes.webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/seccion-zapatos.webp" fetchpriority="high">
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { background: #f4f4f2; }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: #4a4a52; }
+  @keyframes joseCaret { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+  @keyframes joseMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  body { background: #f4f4f2; }
+  @keyframes joseDrift { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(0, -260px, 0); } }
+  [data-jose-root] > div:not([aria-hidden]), [data-jose-root] > footer { position: relative; z-index: 1; }
+  @media (prefers-reduced-motion: reduce) { [aria-hidden] > div { animation: none !important; } }
+  .js-reveal [data-reveal] { opacity: 0; transform: translateY(38px); transition: opacity 0.75s cubic-bezier(0.22,0.61,0.36,1), transform 0.4s cubic-bezier(0.22,0.61,0.36,1), box-shadow 0.4s ease, border-color 0.25s ease; }
+  .js-reveal [data-reveal]:not(.is-in) { transition-duration: 0.75s; }
+  .js-reveal [data-reveal].is-in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .js-reveal [data-reveal] { opacity: 1; transform: none; transition: none; } }
+  @media (max-width: 760px) {
+    .jose-header { grid-template-columns: 1fr auto !important; grid-template-areas: "logo actions" "nav nav" !important; row-gap: 14px !important; }
+    .jose-header-flex { flex-wrap: wrap !important; row-gap: 12px !important; }
+    .jose-logo { grid-area: logo !important; justify-self: start !important; }
+    .jose-actions { grid-area: actions !important; }
+    .jose-nav-links { grid-area: nav !important; flex-wrap: nowrap !important; overflow-x: auto !important; padding-right: 0 !important; gap: 18px !important; -webkit-overflow-scrolling: touch; }
+    .jose-stack { grid-template-columns: 1fr !important; }
+    .jose-stack > p { justify-self: start !important; }
+    .jose-grid4 { grid-template-columns: repeat(2, 1fr) !important; }
+    .jose-gallery { grid-template-columns: 1fr !important; }
+    .jose-gallery-main { order: 1 !important; }
+    .jose-gallery-thumbs { order: 2 !important; flex-direction: row !important; flex-wrap: wrap !important; }
+    .jose-gallery-main { height: clamp(260px, 86vw, 480px) !important; }
+    .jose-cart-item { grid-template-columns: 76px 1fr !important; grid-template-areas: "thumb details" "qty qty" !important; row-gap: 10px !important; }
+    .jose-cart-thumb { grid-area: thumb !important; height: 76px !important; }
+    .jose-cart-details { grid-area: details !important; }
+    .jose-cart-qty { grid-area: qty !important; justify-self: start !important; }
+  }
+  @media (min-width: 761px) and (max-width: 1024px) {
+    .jose-header { gap: 14px !important; }
+    .jose-nav-links { gap: 16px !important; font-size: 12px !important; }
+    .jose-stack { gap: 22px !important; }
+    .jose-grid4 { grid-template-columns: repeat(3, 1fr) !important; }
+    .jose-gallery-main { height: 440px !important; }
+  }
+</style>
+</helmet>
+
+<div data-jose-root="1" ref="{{ rootRef }}" style="position: relative; font-family: Montserrat, Helvetica, sans-serif; color: #111113; background: #f4f4f2; padding: 18px;">
+
+  <div aria-hidden="true" style="position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;">
+    <div style="position: absolute; left: 0; top: 0; width: 100%; height: 200%; background-image: radial-gradient(circle, rgba(17,17,19,0.14) 1px, transparent 1.2px); background-size: 46px 46px; animation: joseDrift 34s linear infinite;"></div>
+    <div style="position: absolute; left: 0; top: 0; width: 100%; height: 200%; background-image: radial-gradient(circle, rgba(17,17,19,0.09) 1px, transparent 1.2px); background-size: 88px 71px; background-position: 22px 13px; animation: joseDrift 58s linear infinite reverse;"></div>
+  </div>
+
+
+  <div style="background: #ffffff; padding: 22px 30px 0;">
+    <header class="jose-header" style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 30px; padding-bottom: 26px;">
+      <nav class="jose-nav-links" style="display: flex; gap: 26px; padding-right: 28px; flex-wrap: wrap; font-size: 13.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;">
+        <a href="Jose Store.dc.html">Inicio</a>
+        <a href="Relojes.dc.html">Relojes</a>
+        <a href="Zapatos.dc.html">Zapatos</a>
+        <a href="Chanclas.dc.html">Chanclas</a>
+        <a href="Ropa.dc.html">Ropa</a>
+      </nav>
+      <a href="Jose Store.dc.html" style="justify-self: center;" class="jose-logo">
+        <span style="font-family: Montserrat, Helvetica, sans-serif; font-weight: 700; font-size: 22px; letter-spacing: -0.02em; white-space: nowrap;">Jose Store</span>
+      </a>
+      <div class="jose-actions" style="display: flex; gap: 20px; justify-self: end; font-family: Montserrat, Helvetica, sans-serif; font-weight: 500; font-size: 12.5px; letter-spacing: 0.08em;">
+        <a href="#">BUSCAR</a>
+        <a href="Carrito.dc.html">CARRITO</a>
+      </div>
+    </header>
+
+    <section style="padding: 44px 0 34px; text-align: center;">
+      <p style="font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #6b6b73; margin: 0 0 22px;">Relojes originales, zapatos, chanclas y ropa</p>
+      <h1 style="font-family: Montserrat, Helvetica, sans-serif; font-weight: 700; font-size: clamp(34px, 9vw, 68px); line-height: 1.04; letter-spacing: -0.035em; margin: 0 auto 22px; max-width: 900px; min-height: 142px; text-wrap: balance;">{{ tituloL1 }}<br>{{ tituloL2 }}<span style="display: inline-block; width: 3px; height: 0.78em; margin-left: 6px; background: #111113; vertical-align: -0.06em; animation: joseCaret 1s step-end infinite;"></span></h1>
+      <p style="font-size: 15px; line-height: 1.7; color: #4d4d55; margin: 0 auto 30px; max-width: 560px; text-wrap: pretty;">Escoge lo que te gusta, armamos tu pedido por WhatsApp y te confirmamos precio y envío antes de pagar.</p>
+      <div style="display: flex; justify-content: center; gap: 12px;">
+        <a href="Relojes.dc.html" style="display: inline-flex; align-items: center; gap: 12px; background: #111113; color: #fff; border-radius: 999px; font-size: 14px; font-weight: 600; padding: 9px 9px 9px 24px;" style-hover="background: #33333a; color: #fff;">Ver catálogo<span style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 999px; background: #fff; color: #111113; font-size: 15px;">→</span></a>
+        <a href="#colecciones" style="display: inline-flex; align-items: center; border: 1px solid #dcdcd7; border-radius: 999px; font-size: 14px; font-weight: 600; padding: 9px 26px;" style-hover="border-color: #111113;">Destacados</a>
+      </div>
+    </section>
+
+    <section style="position: relative; height: clamp(300px, 68vw, 520px); border-radius: 28px; overflow: hidden; background: #111113; margin-bottom: 30px; filter: contrast(1.06) saturate(1.05);">
+      <video ref="{{ heroRef }}" src="assets/hero.mp4" autoplay="{{ true }}" muted="{{ true }}" loop="{{ true }}" controls="{{ false }}" playsinline="{{ true }}" preload="auto" style="width: 100%; height: 100%; object-fit: cover; display: block;"></video>
+      <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.05) 38%, rgba(0,0,0,0.1) 58%, rgba(0,0,0,0.62));"></div>
+      <div style="position: absolute; top: 34px; left: 38px; color: #fff;">
+        <p style="font-family: Montserrat, Helvetica, sans-serif; font-weight: 700; font-size: 44px; line-height: 1; letter-spacing: -0.03em; margin: 0 0 8px;">100%</p>
+        <p style="font-size: 13px; line-height: 1.5; margin: 0;">Relojes originales<br>de marca importados</p>
+      </div>
+      <div style="position: absolute; bottom: 86px; right: 38px; max-width: 240px; text-align: right; color: #fff;">
+        <p style="font-family: Montserrat, Helvetica, sans-serif; font-weight: 700; font-size: 21px; line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 6px;">Pedidos por WhatsApp</p>
+        <p style="font-size: 13px; line-height: 1.55; margin: 0;">Te confirmamos disponibilidad, precio y envío antes de pagar.</p>
+      </div>
+      <div style="position: absolute; left: 50%; transform: translateX(-50%); bottom: 22px; display: flex; gap: 6px; background: #fff; border-radius: 999px; padding: 7px 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.18); max-width: calc(100% - 24px); overflow-x: auto;">
+        <a href="Relojes.dc.html" style="border-radius: 999px; font-size: 13px; font-weight: 600; padding: 8px 18px;" style-hover="background: #f0f0ee; color: #111113;">Relojes</a>
+        <a href="Zapatos.dc.html" style="border-radius: 999px; font-size: 13px; font-weight: 600; padding: 8px 18px;" style-hover="background: #f0f0ee; color: #111113;">Zapatos</a>
+        <a href="Chanclas.dc.html" style="border-radius: 999px; font-size: 13px; font-weight: 600; padding: 8px 18px;" style-hover="background: #f0f0ee; color: #111113;">Chanclas</a>
+        <a href="Ropa.dc.html" style="border-radius: 999px; font-size: 13px; font-weight: 600; padding: 8px 18px;" style-hover="background: #f0f0ee; color: #111113;">Ropa</a>
+      </div>
+    </section>
+  </div>
+
+  <div style="background: #111113; color: #fff; overflow: hidden; padding: 15px 0;">
+    <div style="display: flex; width: max-content; animation: joseMarquee 26s linear infinite;">
+      <sc-for list="{{ marquee }}" as="m" hint-placeholder-count="8">
+        <span style="font-family: Montserrat, Helvetica, sans-serif; font-weight: 700; font-size: 16px; letter-spacing: 0.02em; text-transform: uppercase; padding: 0 22px; white-space: nowrap;">{{ m }}</span>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="background: #ffffff; padding: 34px 30px;">
+    <div class="jose-stack" style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+      <a href="Relojes.dc.html" style="position: relative; display: block; height: 330px; background: repeating-linear-gradient(135deg, #e4e4e0 0 12px, #ececE8 12px 24px);" style-hover="color: #111113;">
+        <span style="position: absolute; inset: 0; background-image: url('assets/seccion-relojes.webp'); background-size: cover; background-position: center 35%;"></span>
+        <span style="position: absolute; left: 50%; transform: translateX(-50%); bottom: 20px; background: #fff; font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 11px 20px;">Ver relojes</span>
+      </a>
+      <a href="Zapatos.dc.html" style="position: relative; display: block; height: 330px; background: repeating-linear-gradient(135deg, #e4e4e0 0 12px, #ececE8 12px 24px);" style-hover="color: #111113;">
+        <span style="position: absolute; inset: 0; background-image: url('assets/seccion-zapatos.webp'); background-size: cover; background-position: center 60%;"></span>
+        <span style="position: absolute; left: 50%; transform: translateX(-50%); bottom: 20px; background: #fff; font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 11px 20px;">Ver zapatos</span>
+      </a>
+    </div>
+  </div>
+
+  <div id="colecciones" style="background: #ffffff; padding: 40px 30px 44px;">
+    <div class="jose-stack" style="display: grid; grid-template-columns: 1fr 1fr; align-items: end; gap: 30px; margin: 0 0 26px;">
+      <h2 style="font-family: Montserrat, Helvetica, sans-serif; font-weight: 700; font-size: 33px; line-height: 0.95; letter-spacing: -0.025em; margin: 0;">Nuestro catálogo</h2>
+      <p style="font-size: 15px; line-height: 1.65; color: #4d4d55; margin: 0 0 6px; justify-self: end; max-width: 400px; text-wrap: pretty;">Cada sección tiene su propia página para que encuentres lo que buscas sin perderte. Los relojes se cotizan directamente con el vendedor; zapatos y ropa tienen precio y tallas.</p>
+    </div>
+    <div style="display: flex; gap: 8px; margin: 0 0 26px; flex-wrap: wrap;">
+      <span style="background: #111113; color: #fff; font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 10px 18px; transition: transform 0.3s cubic-bezier(0.22,0.61,0.36,1);">Destacados</span>
+      <a href="Relojes.dc.html" style="border: 1px solid #dcdcd7; font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 10px 18px; transition: border-color 0.25s ease, transform 0.3s cubic-bezier(0.22,0.61,0.36,1);" style-hover="border-color: #111113; transform: translateY(-2px);">Relojes</a>
+      <a href="Zapatos.dc.html" style="border: 1px solid #dcdcd7; font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 10px 18px; transition: border-color 0.25s ease, transform 0.3s cubic-bezier(0.22,0.61,0.36,1);" style-hover="border-color: #111113; transform: translateY(-2px);">Zapatos</a>
+      <a href="Ropa.dc.html" style="border: 1px solid #dcdcd7; font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 10px 18px; transition: border-color 0.25s ease, transform 0.3s cubic-bezier(0.22,0.61,0.36,1);" style-hover="border-color: #111113; transform: translateY(-2px);">Ropa</a>
+    </div>
+    <div data-stagger style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;">
+      <sc-for list="{{ featured }}" as="p" hint-placeholder-count="4">
+        <a href="{{ p.href }}" style="display: flex; flex-direction: column; border: 1px solid #e8e8e4; box-shadow: 0 0 0 rgba(17,17,19,0);" style-hover="color: #111113; border-color: #111113; transform: translateY(-6px); box-shadow: 0 20px 36px rgba(17,17,19,0.14);">
+          <div style="position: relative; height: 260px; background: #ffffff; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+            <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; transition: transform 0.5s cubic-bezier(0.22,0.61,0.36,1);" style-hover="transform: scale(1.07);">
+              <sc-if value="{{ p.media }}" hint-placeholder-val="{{ false }}">{{ p.media }}</sc-if>
+              <sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ true }}">
+                <span style="font-family: Montserrat, Helvetica, sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 0.12em; color: #96968e;">FOTO PRODUCTO</span>
+              </sc-if>
+            </div>
+            <span style="position: absolute; top: 10px; left: 10px; background: #ffffff; color: #111113; border-radius: 999px; font-family: Montserrat, Helvetica, sans-serif; font-weight: 600; font-size: 9px; letter-spacing: 0.1em; padding: 6px 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">{{ p.section }}</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px; padding: 16px 16px 18px;">
+            <p style="font-size: 15px; font-weight: 600; line-height: 1.4; margin: 0;">{{ p.name }}</p>
+            <p style="font-family: Montserrat, Helvetica, sans-serif; font-weight: 500; font-size: 12.5px; letter-spacing: 0.06em; color: #4d4d55; margin: 0;">{{ p.price }}</p>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="background: #ffffff; padding: 26px 30px 44px;">
+    <h2 style="font-family: Montserrat, Helvetica, sans-serif; font-weight: 700; font-size: clamp(26px, 6.5vw, 41px); line-height: 0.94; letter-spacing: -0.025em; text-align: right; margin: 0 0 0 auto; max-width: 820px;">Relojes, zapatos y ropa en un solo catálogo</h2>
+  </div>
+
+  <div style="background: #ffffff; border-radius: 24px; padding: 56px 40px 60px; margin-bottom: 18px;">
+    <div style="text-align: center; margin-bottom: 40px;">
+      <p style="font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #6b6b73; margin: 0 0 14px;">Proceso de compra</p>
+      <h3 style="font-family: Montserrat, Helvetica, sans-serif; font-weight: 700; font-size: clamp(28px, 6vw, 42px); line-height: 1.05; letter-spacing: -0.03em; margin: 0 auto; max-width: 620px; text-wrap: balance;">Comprar toma tres pasos</h3>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 36px;">
+      <div style="background: #f7f7f5; border-radius: 18px; padding: 28px 26px 30px;">
+        <span style="display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 999px; background: #111113; color: #fff; font-size: 14px; font-weight: 700; margin-bottom: 18px;">1</span>
+        <p style="font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 8px;">Elige</p>
+        <p style="font-size: 14px; line-height: 1.65; color: #55555d; margin: 0;">Entra a la sección que te interesa y guarda los productos que quieres.</p>
+      </div>
+      <div style="background: #f7f7f5; border-radius: 18px; padding: 28px 26px 30px;">
+        <span style="display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 999px; background: #111113; color: #fff; font-size: 14px; font-weight: 700; margin-bottom: 18px;">2</span>
+        <p style="font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 8px;">Escríbenos</p>
+        <p style="font-size: 14px; line-height: 1.65; color: #55555d; margin: 0;">Nos envías tu lista por WhatsApp y confirmamos disponibilidad al momento.</p>
+      </div>
+      <div style="background: #f7f7f5; border-radius: 18px; padding: 28px 26px 30px;">
+        <span style="display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 999px; background: #111113; color: #fff; font-size: 14px; font-weight: 700; margin-bottom: 18px;">3</span>
+        <p style="font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 8px;">Cerramos el pedido</p>
+        <p style="font-size: 14px; line-height: 1.65; color: #55555d; margin: 0;">Te damos el precio final y el valor del envío antes de pagar.</p>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: center;">
+      <a href="https://wa.me/573003838830?text=Hola%20Jose%20Store%2C%20quiero%20informaci%C3%B3n%20de%20un%20producto." target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 12px; background: #111113; color: #fff; border-radius: 999px; font-size: 14px; font-weight: 600; padding: 9px 9px 9px 24px;" style-hover="background: #33333a; color: #fff;">Escribir por WhatsApp<span style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 999px; background: #fff; color: #111113; font-size: 15px;">→</span></a>
+    </div>
+  </div>
+
+  <footer style="background: #ffffff; padding: 40px 30px 26px;">
+    <div class="jose-stack" style="display: grid; grid-template-columns: 1.2fr 1fr 1.3fr; gap: 36px;">
+      <div>
+        <p style="font-family: Montserrat, Helvetica, sans-serif; font-weight: 700; font-size: 22px; letter-spacing: -0.02em; margin: 0 0 14px;">Jose Store</p>
+        <p style="font-size: 13.5px; line-height: 1.65; color: #4d4d55; margin: 0; max-width: 240px; text-wrap: pretty;">Relojes originales, zapatos línea 1.1 y ropa. Pedidos por WhatsApp, envíos a todo el país.</p>
+      </div>
+      <div>
+        <h4 style="font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin: 4px 0 14px;">Catálogo</h4>
+        <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; color: #4d4d55;">
+          <a href="Relojes.dc.html">Relojes</a>
+          <a href="Zapatos.dc.html">Zapatos</a>
+          <a href="Chanclas.dc.html">Chanclas</a>
+          <a href="Camisetas.dc.html">Camisetas</a>
+          <a href="Pantalones.dc.html">Pantalones</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin: 4px 0 14px;">Importante</h4>
+        <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; line-height: 1.65; color: #4d4d55;">
+          <p style="margin: 0;">La línea de zapatos 1.1 corresponde a réplica de alta calidad, no a producto original.</p>
+          <p style="margin: 0;">Los relojes se manejan por cotización directa con el vendedor.</p>
+          <p style="margin: 0;">El valor del envío se confirma por WhatsApp.</p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 32px; padding-top: 16px; border-top: 1px solid #e8e8e4; display: flex; justify-content: space-between; font-family: Montserrat, Helvetica, sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 0.1em; color: #66666d;">
+      <span>© 2026 JOSE STORE</span>
+      <span>PEDIDOS POR WHATSAPP</span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1440}}">
+class Component extends DCLogic {
+  img(src, name) {
+    return React.createElement("img", {
+      src, alt: name, loading: "lazy", decoding: "async",
+      style: { maxHeight: 252, maxWidth: "86%", width: "auto", height: "auto", display: "block", objectFit: "contain" }
+    });
+  }
+  setupReveal() {
+    const root = this.rootEl || document.querySelector("[data-jose-root]");
+    if (!root || !root.children.length || this.revealReady) return;
+    this.revealReady = true;
+    const targets = [];
+    Array.from(root.children).filter(b => !b.hasAttribute("aria-hidden")).forEach(block => {
+      const kids = Array.from(block.children);
+      if (kids.length > 1 && block.tagName !== "SECTION") {
+        kids.forEach(k => {
+          if (k.hasAttribute("data-stagger")) Array.from(k.children).forEach(card => targets.push(card));
+          else targets.push(k);
+        });
+      } else targets.push(block);
+    });
+    targets.forEach((el, i) => {
+      el.setAttribute("data-reveal", "");
+      el.style.transitionDelay = Math.min(i % 4, 3) * 90 + "ms";
+    });
+    root.classList.add("js-reveal");
+    this.revealTargets = targets;
+
+    const check = () => {
+      this.revealPending = false;
+      const h = window.innerHeight || 800;
+      this.revealTargets = this.revealTargets.filter(el => {
+        const r = el.getBoundingClientRect();
+        if (r.top < h * 0.92 && r.bottom > 0) { el.classList.add("is-in"); return false; }
+        return true;
+      });
+      if (!this.revealTargets.length) this.teardownReveal();
+    };
+    this.onScroll = () => {
+      if (this.revealPending) return;
+      this.revealPending = true;
+      requestAnimationFrame(check);
+    };
+    const scroller = root.closest("[data-scroll], .scroll, main") || null;
+    this.scroller = scroller;
+    window.addEventListener("scroll", this.onScroll, true);
+    window.addEventListener("resize", this.onScroll);
+    if (scroller) scroller.addEventListener("scroll", this.onScroll);
+    this.revealTimer = setInterval(check, 300);
+    this.safety = setTimeout(() => {
+      const doc = document.documentElement;
+      const sinScroll = doc.scrollHeight <= window.innerHeight + 4;
+      if (!sinScroll) return;
+      (this.revealTargets || []).forEach(el => el.classList.add("is-in"));
+      this.revealTargets = [];
+      this.teardownReveal();
+    }, 4000);
+    check();
+  }
+  teardownReveal() {
+    clearInterval(this.bootTimer);
+    clearInterval(this.revealTimer);
+    clearTimeout(this.safety);
+    window.removeEventListener("scroll", this.onScroll, true);
+    window.removeEventListener("resize", this.onScroll);
+    if (this.scroller) this.scroller.removeEventListener("scroll", this.onScroll);
+  }
+  componentWillUnmount() { clearInterval(this.typeTimer); this.teardownReveal(); }
+  startTyping() {
+    const full = "Lo que buscas,\nen un solo catálogo";
+    this.typeTimer = setInterval(() => {
+      this.setState(s => {
+        const n = (s.typed || 0) + 1;
+        if (n >= full.length) clearInterval(this.typeTimer);
+        return { typed: n };
+      });
+    }, 55);
+  }
+  componentDidMount() {
+    this.startTyping();
+    let tries = 0;
+    this.bootTimer = setInterval(() => {
+      this.setupReveal();
+      if (this.revealReady || ++tries > 30) clearInterval(this.bootTimer);
+    }, 100);
+    [this.heroVideo, this.darkVideo].forEach((v) => {
+      if (!v) return;
+      v.muted = true;
+      v.defaultMuted = true;
+      const p = v.play();
+      if (p && p.catch) p.catch(() => {});
+    });
+    import("./productos.js").then(cat => {
+      const precios = {};
+      cat.productos.forEach(x => { precios[x.id] = x.price; });
+      this.setState({ precios });
+    });
+  }
+  renderVals() {
+    const marqueeItems = ["JOSE STORE", "✦", "RELOJES", "✦", "ZAPATOS", "✦", "ROPA", "✦"];
+    const precios = this.state.precios || {};
+    const featured = [
+      { section: "RELOJ", name: "Invicta Pro Diver — Oro Dorado", id: "invicta-pro-diver-oro-dorado", href: "Producto.dc.html?p=invicta-pro-diver-oro-dorado", img: "assets/reloj-invicta-pro-diver-oro.webp" },
+      { section: "ZAPATO", name: "Tenis running gris / neón", id: "tenis-running-gris-neon", href: "Producto.dc.html?p=tenis-running-gris-neon", img: "assets/z-01-gris-neon.webp" },
+      { section: "RELOJ", name: "Guess Rectangular — Dorado", id: "guess-rectangular-dorado", href: "Producto.dc.html?p=guess-rectangular-dorado", img: "assets/w-guess-rectangular-oro.webp" },
+      { section: "ZAPATO", name: "Tenis clásico blanco total", id: "tenis-clasico-blanco-total", href: "Producto.dc.html?p=tenis-clasico-blanco-total", img: "assets/z-07-blanco-total.webp" }
+    ];
+    return {
+      tituloL1: "Lo que buscas,\nen un solo catálogo".slice(0, this.state.typed || 0).split("\n")[0],
+      tituloL2: ("Lo que buscas,\nen un solo catálogo".slice(0, this.state.typed || 0).split("\n")[1]) || "",
+      rootRef: (el) => { this.rootEl = el; },
+      heroRef: (el) => { this.heroVideo = el; },
+      darkRef: (el) => { this.darkVideo = el; },
+      marquee: marqueeItems.concat(marqueeItems),
+      featured: featured.map(p => ({ ...p, price: precios[p.id] || "", noImg: !p.img, media: p.img ? this.img(p.img, p.name) : null }))
+    };
+  }
+}
+</script>
+</body>
+</html>
